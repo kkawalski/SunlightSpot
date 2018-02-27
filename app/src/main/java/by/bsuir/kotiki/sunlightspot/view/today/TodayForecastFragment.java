@@ -5,12 +5,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.Map;
 
 import by.bsuir.kotiki.sunlightspot.R;
+import by.bsuir.kotiki.sunlightspot.model.today.TodayForecastParser;
+import by.bsuir.kotiki.sunlightspot.presenter.TodayPresenter;
 
 public class TodayForecastFragment extends Fragment {
+    private final TodayPresenter presenter = new TodayPresenter(this);
     public TodayForecastFragment() {}
 
     public static TodayForecastFragment newInstance(Map<String, String> params) {
@@ -32,6 +36,8 @@ public class TodayForecastFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_today_forecast, container, false);
+        View view = inflater.inflate(R.layout.fragment_today_forecast, container, false);
+        presenter.updateForecast();
+        return view;
     }
 }
