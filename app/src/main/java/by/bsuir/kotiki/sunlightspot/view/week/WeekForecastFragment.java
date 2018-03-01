@@ -9,8 +9,11 @@ import android.view.ViewGroup;
 import java.util.Map;
 
 import by.bsuir.kotiki.sunlightspot.R;
+import by.bsuir.kotiki.sunlightspot.presenter.week.WeekPresenter;
 
 public class WeekForecastFragment extends Fragment {
+    private final WeekPresenter presenter = new WeekPresenter(this);
+
     public WeekForecastFragment() {}
 
     public static WeekForecastFragment newInstance(Map<String, String> params) {
@@ -32,6 +35,8 @@ public class WeekForecastFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_week_forecast, container, false);
+        View view = inflater.inflate(R.layout.fragment_week_forecast, container, false);
+        presenter.updateForecast();
+        return view;
     }
 }

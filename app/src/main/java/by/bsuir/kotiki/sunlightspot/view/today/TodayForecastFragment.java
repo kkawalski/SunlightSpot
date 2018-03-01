@@ -5,13 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.Map;
 
 import by.bsuir.kotiki.sunlightspot.R;
-import by.bsuir.kotiki.sunlightspot.model.today.TodayForecastParser;
-import by.bsuir.kotiki.sunlightspot.presenter.TodayPresenter;
+import by.bsuir.kotiki.sunlightspot.presenter.today.TodayPresenter;
 
 public class TodayForecastFragment extends Fragment {
     private final TodayPresenter presenter = new TodayPresenter(this);

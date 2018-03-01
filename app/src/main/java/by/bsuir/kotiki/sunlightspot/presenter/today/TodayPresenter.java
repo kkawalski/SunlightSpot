@@ -1,4 +1,4 @@
-package by.bsuir.kotiki.sunlightspot.presenter;
+package by.bsuir.kotiki.sunlightspot.presenter.today;
 
 import android.support.v4.app.Fragment;
 
