@@ -118,6 +118,5 @@ public class WeekForecastParser extends AsyncTask<Void, Void, String> {
                 Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show();
             }
         }
-
     }
 }
