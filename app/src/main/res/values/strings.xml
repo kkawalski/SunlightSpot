@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Sunlight Spot</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="this_week">This Week</string>
+    <string name="_0_00">0:00</string>
+</resources>
