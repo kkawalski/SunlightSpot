@@ -77,11 +77,11 @@ public class TodayForecastParser extends AsyncTask<Void, Void, String> {
 
                 String windDegree = jsonForecast.getJSONObject("wind").getString("deg");
                 TextView windDegreeTextView = fragment.getView().findViewById(R.id.windTextView);
-                windDegreeTextView.setText(windDegree);
+                windDegreeTextView.setText(windDegree + " °");
 
                 String windSpeed = jsonForecast.getJSONObject("wind").getString("speed");
                 TextView windSpeedTextView = fragment.getView().findViewById(R.id.speedTextView);
-                windSpeedTextView.setText(windSpeed);
+                windSpeedTextView.setText(windSpeed + "m/s");
 
                 String city = jsonForecast.getString("name");
                 TextView cityTextView = fragment.getView().findViewById(R.id.cityTextView);

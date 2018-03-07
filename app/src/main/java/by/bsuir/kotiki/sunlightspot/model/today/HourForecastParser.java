@@ -1,4 +1,4 @@
-package by.bsuir.kotiki.sunlightspot.model.tomorrow;
+package by.bsuir.kotiki.sunlightspot.model.today;
 
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
@@ -12,16 +12,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import by.bsuir.kotiki.sunlightspot.R;
 
-public class TomorrowForecastParser extends AsyncTask<Void, Void, String> {
+public class HourForecastParser extends AsyncTask<Void, Void, String> {
     private final Fragment fragment;
 
-    public TomorrowForecastParser(Fragment fragment) {
+    public HourForecastParser(Fragment fragment) {
         this.fragment = fragment;
     }
 
@@ -63,41 +60,11 @@ public class TomorrowForecastParser extends AsyncTask<Void, Void, String> {
 
                 double[] temperatures = new double[5];
                 String[] states = new String[5];
-                double temperature = 0;
-                String pressure = "", humidity = "", windDegree = "", windSpeed = "";
-                for (int i = 7, j = 0; i < 16; i += 2, j++) {
+                for (int i = 0, j = 0; i < 9; i += 2, j++) {
                     JSONObject currentJsonObject = (JSONObject) list.get(i);
                     temperatures[j] = Double.parseDouble(currentJsonObject.getJSONObject("main").getString("temp")) - 273;
                     states[j] = ((JSONObject) currentJsonObject.getJSONArray("weather").get(0)).getString("main");
-
-                    if (i == 11) {
-                        temperature = temperatures[j];
-                        pressure = currentJsonObject.getJSONObject("main").getString("pressure");
-                        humidity = currentJsonObject.getJSONObject("main").getString("humidity");
-                        windDegree = currentJsonObject.getJSONObject("wind").getString("deg");
-                        windSpeed = currentJsonObject.getJSONObject("wind").getString("speed");
-                    }
                 }
-
-                TextView tomorrowTextView = fragment.getView().findViewById(R.id.tomorrowTextView);
-                tomorrowTextView.setText(new SimpleDateFormat("dd MMMM").format(new GregorianCalendar().getTime()));
-
-                TextView temperatureTextView = fragment.getView().findViewById(R.id.temperatureTextView);
-                temperatureTextView.setText(String.format("%.1f °C", temperature));
-
-                TextView pressureTextView = fragment.getView().findViewById(R.id.pressureTextView);
-                pressureTextView.setText(String.format("%.1f '", Double.parseDouble(pressure) * 0.75006375541921));
-
-
-                TextView humidityTextView = fragment.getView().findViewById(R.id.humidityTextView);
-                humidityTextView.setText(humidity + " %");
-
-                TextView windDegreeTextView = fragment.getView().findViewById(R.id.windDegreeTextView);
-                windDegreeTextView.setText(windDegree + " °");
-
-                TextView windSpeedTextView = fragment.getView().findViewById(R.id.windSpeedTextView);
-                windSpeedTextView.setText(windSpeed + " m/s");
-
 
                 TextView temperature1TextView = fragment.getView().findViewById(R.id.temperature1TextView);
                 temperature1TextView.setText(String.format("%.1f °C", temperatures[0]));
