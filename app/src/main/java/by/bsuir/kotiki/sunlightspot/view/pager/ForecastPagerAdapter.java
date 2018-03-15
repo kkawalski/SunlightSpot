@@ -4,25 +4,26 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 import by.bsuir.kotiki.sunlightspot.view.today.TodayForecastFragment;
 import by.bsuir.kotiki.sunlightspot.view.tomorrow.TomorrowForecastFragment;
 import by.bsuir.kotiki.sunlightspot.view.week.WeekForecastFragment;
 
 public class ForecastPagerAdapter extends FragmentPagerAdapter {
+    private final List<Fragment> fragments = new ArrayList<>();
+
     public ForecastPagerAdapter(FragmentManager fm) {
         super(fm);
+        fragments.add(TodayForecastFragment.newInstance());
+        fragments.add(TomorrowForecastFragment.newInstance());
+        fragments.add(WeekForecastFragment.newInstance());
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0: return TodayForecastFragment.newInstance(Collections.EMPTY_MAP);
-            case 1: return TomorrowForecastFragment.newInstance(Collections.EMPTY_MAP);
-            case 2: return WeekForecastFragment.newInstance(Collections.EMPTY_MAP);
-        }
-        return null;
+        return fragments.get(position);
     }
 
     @Override

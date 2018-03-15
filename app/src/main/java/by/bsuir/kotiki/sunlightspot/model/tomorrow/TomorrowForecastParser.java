@@ -13,7 +13,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import by.bsuir.kotiki.sunlightspot.R;
@@ -47,7 +46,7 @@ public class TomorrowForecastParser extends AsyncTask<Void, Void, String> {
             resultJson = builder.toString();
 
         } catch (Exception e) {
-            Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show();
+            fragment.getActivity().runOnUiThread(() -> Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show());
         }
         return resultJson;
     }
@@ -56,7 +55,7 @@ public class TomorrowForecastParser extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String stringForecast) {
         super.onPostExecute(stringForecast);
         if (stringForecast == null) {
-            Toast.makeText(fragment.getActivity().getApplicationContext(), "Please, connect to the internet", Toast.LENGTH_LONG).show();
+            fragment.getActivity().runOnUiThread(() -> Toast.makeText(fragment.getActivity().getApplicationContext(), "Please connect to the Internet", Toast.LENGTH_LONG).show());
         } else {
             try {
                 JSONArray list = new JSONObject(stringForecast).getJSONArray("list");
@@ -114,7 +113,7 @@ public class TomorrowForecastParser extends AsyncTask<Void, Void, String> {
                 TextView temperature5TextView = fragment.getView().findViewById(R.id.temperature5TextView);
                 temperature5TextView.setText(String.format("%.1f °C", temperatures[4]));
             } catch (Exception e) {
-                Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show();
+                fragment.getActivity().runOnUiThread(() -> Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show());
             }
         }
     }
