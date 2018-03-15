@@ -45,9 +45,8 @@ public class WeekForecastParser extends AsyncTask<Void, Void, String> {
                 builder.append(line);
             }
             resultJson = builder.toString();
-
         } catch (Exception e) {
-            Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show();
+            fragment.getActivity().runOnUiThread(() -> Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show());
         }
         return resultJson;
     }
@@ -56,7 +55,7 @@ public class WeekForecastParser extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String stringForecast) {
         super.onPostExecute(stringForecast);
         if (stringForecast == null) {
-            Toast.makeText(fragment.getActivity().getApplicationContext(), "Please, connect to the internet", Toast.LENGTH_LONG).show();
+            fragment.getActivity().runOnUiThread(() -> Toast.makeText(fragment.getActivity().getApplicationContext(), "Please connect to the Internet", Toast.LENGTH_LONG).show());
         } else {
             try {
                 JSONArray list = new JSONObject(stringForecast).getJSONArray("list");
@@ -115,7 +114,7 @@ public class WeekForecastParser extends AsyncTask<Void, Void, String> {
                 forecast6TextView.setText(String.format("%.1f °C, %s", temperatures[5], states[5]));
 
             } catch (Exception e) {
-                Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show();
+                fragment.getActivity().runOnUiThread(() -> Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show());
             }
         }
     }

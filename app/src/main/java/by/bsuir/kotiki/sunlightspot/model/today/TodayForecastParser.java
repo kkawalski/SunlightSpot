@@ -43,7 +43,7 @@ public class TodayForecastParser extends AsyncTask<Void, Void, String> {
             resultJson = builder.toString();
 
         } catch (Exception e) {
-            Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show();
+            fragment.getActivity().runOnUiThread(() -> Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show());
         }
         return resultJson;
     }
@@ -53,7 +53,7 @@ public class TodayForecastParser extends AsyncTask<Void, Void, String> {
         super.onPostExecute(stringForecast);
 
         if (stringForecast == null) {
-            Toast.makeText(fragment.getActivity().getApplicationContext(), "Please, connect to the internet", Toast.LENGTH_LONG).show();
+            fragment.getActivity().runOnUiThread(() -> Toast.makeText(fragment.getActivity().getApplicationContext(), "Please connect to the Internet", Toast.LENGTH_LONG).show());
         } else {
             JSONObject jsonForecast;
             try {
@@ -88,7 +88,7 @@ public class TodayForecastParser extends AsyncTask<Void, Void, String> {
                 cityTextView.setText(city);
 
             } catch (Exception e) {
-                Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show();
+                fragment.getActivity().runOnUiThread(() -> Toast.makeText(fragment.getActivity().getApplicationContext(), "Application error", Toast.LENGTH_LONG).show());
             }
         }
     }
