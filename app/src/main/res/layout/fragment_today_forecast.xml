@@ -21,8 +21,8 @@
 
             <ImageView
                 android:id="@+id/currentStateImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
             <LinearLayout
@@ -51,7 +51,7 @@
         <ImageView
             android:id="@+id/animalImageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
         <TextView
