@@ -2,6 +2,7 @@ package by.bsuir.kotiki.sunlightspot.model.today;
 
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,9 +14,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import by.bsuir.kotiki.sunlightspot.R;
+import by.bsuir.kotiki.sunlightspot.model.animal.AnimalStorage;
+import by.bsuir.kotiki.sunlightspot.model.icon.IconStorage;
 
 public class TodayForecastParser extends AsyncTask<Void, Void, String> {
     private final Fragment fragment;
+    private static final IconStorage iconStorage = IconStorage.getInstance();
+    private static final AnimalStorage animalStorage = AnimalStorage.getInstance();
 
     public TodayForecastParser(Fragment fragment) {
         this.fragment = fragment;
@@ -62,6 +67,13 @@ public class TodayForecastParser extends AsyncTask<Void, Void, String> {
                 String state = ((JSONObject) jsonForecast.getJSONArray("weather").get(0)).getString("main");
                 TextView currentStateTextView = fragment.getView().findViewById(R.id.currentStateTextView);
                 currentStateTextView.setText(state);
+
+                int currentStateId = Integer.parseInt(((JSONObject) jsonForecast.getJSONArray("weather").get(0)).getString("id"));
+                ImageView currentStateImageView = fragment.getView().findViewById(R.id.currentStateImageView);
+                currentStateImageView.setImageDrawable(iconStorage.getIcon(currentStateId, fragment.getContext()));
+
+                ImageView animalImageView = fragment.getView().findViewById(R.id.animalImageView);
+                animalImageView.setImageDrawable(animalStorage.getAnimal(currentStateId, fragment.getContext()));
 
                 String temperature = jsonForecast.getJSONObject("main").getString("temp");
                 TextView currentTemperatureTextView = fragment.getView().findViewById(R.id.currentTemperatureTextView);
