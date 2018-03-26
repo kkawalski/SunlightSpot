@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import by.bsuir.kotiki.sunlightspot.R;
 import by.bsuir.kotiki.sunlightspot.presenter.today.TodayPresenter;
@@ -28,6 +29,7 @@ public class TodayForecastFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_today_forecast, container, false);
         presenter.updateForecast();
+        ImageView currentStateImageView = view.findViewById(R.id.currentStateImageView);
         return view;
     }
 }
