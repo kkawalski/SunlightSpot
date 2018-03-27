@@ -6,16 +6,14 @@ import by.bsuir.kotiki.sunlightspot.model.today.HourForecastParser;
 import by.bsuir.kotiki.sunlightspot.model.today.TodayForecastParser;
 
 public final class TodayPresenter {
-    private final TodayForecastParser generalParser;
-    private final HourForecastParser hourParser;
+    private final Fragment fragment;
 
     public TodayPresenter(Fragment fragment) {
-        generalParser = new TodayForecastParser(fragment);
-        hourParser = new HourForecastParser(fragment);
+        this.fragment = fragment;
     }
 
     public void updateForecast() {
-        generalParser.execute();
-        hourParser.execute();
+        new TodayForecastParser(fragment).execute();
+        new HourForecastParser(fragment).execute();
     }
 }

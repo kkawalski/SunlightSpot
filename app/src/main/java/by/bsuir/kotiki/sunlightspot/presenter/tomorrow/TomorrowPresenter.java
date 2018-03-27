@@ -5,13 +5,13 @@ import android.support.v4.app.Fragment;
 import by.bsuir.kotiki.sunlightspot.model.tomorrow.TomorrowForecastParser;
 
 public final class TomorrowPresenter {
-    private final TomorrowForecastParser parser;
+    private final Fragment fragment;
 
     public TomorrowPresenter(Fragment fragment) {
-        parser = new TomorrowForecastParser(fragment);
+        this.fragment = fragment;
     }
 
     public void updateForecast() {
-        parser.execute();
+        new TomorrowForecastParser(fragment).execute();
     }
 }

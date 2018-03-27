@@ -5,13 +5,13 @@ import android.support.v4.app.Fragment;
 import by.bsuir.kotiki.sunlightspot.model.week.WeekForecastParser;
 
 public final class WeekPresenter {
-    private final WeekForecastParser parser;
+    private final Fragment fragment;
 
     public WeekPresenter(Fragment fragment) {
-        parser = new WeekForecastParser(fragment);
+        this.fragment = fragment;
     }
 
     public void updateForecast() {
-        parser.execute();
+        new WeekForecastParser(fragment).execute();
     }
 }
