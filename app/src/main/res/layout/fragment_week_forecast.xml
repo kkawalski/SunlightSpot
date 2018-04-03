@@ -16,6 +16,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
             android:text="@string/this_week"
             android:textAlignment="center"
             android:textSize="36sp" />
@@ -25,11 +26,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
             <ImageView
                 android:id="@+id/status1ImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="50dp"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
             <LinearLayout
@@ -41,16 +49,20 @@
                 <TextView
                     android:id="@+id/date1TextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/forecast1TextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -62,10 +74,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
             <ImageView
                 android:id="@+id/status2ImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="50dp"
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
@@ -79,7 +97,9 @@
                     android:id="@+id/date2TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
 
@@ -87,7 +107,9 @@
                     android:id="@+id/forecast2TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -99,10 +121,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
             <ImageView
                 android:id="@+id/status3ImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="50dp"
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
@@ -116,7 +144,9 @@
                     android:id="@+id/date3TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
 
@@ -124,7 +154,9 @@
                     android:id="@+id/forecast3TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -136,10 +168,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
             <ImageView
                 android:id="@+id/status4ImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="50dp"
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
@@ -153,7 +191,9 @@
                     android:id="@+id/date4TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
 
@@ -161,7 +201,9 @@
                     android:id="@+id/forecast4TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -173,10 +215,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
             <ImageView
                 android:id="@+id/status5ImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="50dp"
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
@@ -190,7 +238,9 @@
                     android:id="@+id/date5TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
 
@@ -198,7 +248,9 @@
                     android:id="@+id/forecast5TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -210,10 +262,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
             <ImageView
                 android:id="@+id/status6ImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="50dp"
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
@@ -227,7 +285,9 @@
                     android:id="@+id/date6TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
 
@@ -235,7 +295,9 @@
                     android:id="@+id/forecast6TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="?"
                     android:textSize="24sp" />
             </LinearLayout>
