@@ -10,11 +10,11 @@ import by.bsuir.kotiki.sunlightspot.entity.day.DayForecast;
 import by.bsuir.kotiki.sunlightspot.entity.day.detail.DetailedForecast;
 import by.bsuir.kotiki.sunlightspot.entity.day.hour.HourForecast;
 import by.bsuir.kotiki.sunlightspot.model.parser.Parser;
-import by.bsuir.kotiki.sunlightspot.presenter.Presenter;
+import by.bsuir.kotiki.sunlightspot.presenter.ForecastPresenter;
 
 public class TomorrowForecastParser extends Parser {
-    public TomorrowForecastParser(Presenter presenter) {
-        super(presenter, "http://api.openweathermap.org/data/2.5/forecast?id=625144&appid=57432abff315a24276715cd1a27b3d18");
+    public TomorrowForecastParser(ForecastPresenter presenter, String location) {
+        super(presenter, String.format("http://api.openweathermap.org/data/2.5/forecast?%sappid=57432abff315a24276715cd1a27b3d18", location));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class TomorrowForecastParser extends Parser {
                 }
             }
 
-            HourForecast hourForecast = new HourForecast(temperatures, states, statesId);
+            HourForecast hourForecast = new HourForecast("", temperatures, states, statesId);
             DayForecast forecast = new DayForecast(new Date(), detailedForecast, hourForecast);
 
             presenter.updateForecast(forecast);

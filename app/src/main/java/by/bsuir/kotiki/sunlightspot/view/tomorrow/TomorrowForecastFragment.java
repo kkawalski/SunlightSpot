@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import by.bsuir.kotiki.sunlightspot.R;
 import by.bsuir.kotiki.sunlightspot.entity.day.DayForecast;
@@ -21,7 +22,7 @@ import by.bsuir.kotiki.sunlightspot.model.icon.IconStorage;
 import by.bsuir.kotiki.sunlightspot.presenter.tomorrow.TomorrowPresenter;
 
 public class TomorrowForecastFragment extends Fragment {
-    private final TomorrowPresenter presenter = new TomorrowPresenter(this);
+    private TomorrowPresenter presenter;
     private final IconStorage iconStorage = IconStorage.getInstance();
 
     private ImageView detailedStateImageView;
@@ -49,9 +50,7 @@ public class TomorrowForecastFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tomorrow_forecast, container, false);
-        presenter.updateForecast();
-        return view;
+        return inflater.inflate(R.layout.fragment_tomorrow_forecast, container, false);
     }
 
     @Override
@@ -82,6 +81,14 @@ public class TomorrowForecastFragment extends Fragment {
         statusImageView[4] = getView().findViewById(R.id.state5ImageView);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        presenter = new TomorrowPresenter(this);
+        presenter.updateForecast();
+    }
+
     public void displayMessage(String message) {
         getActivity().runOnUiThread(() -> Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show());
     }
@@ -90,7 +97,7 @@ public class TomorrowForecastFragment extends Fragment {
         //set detailed forecast data
         DetailedForecast detailedForecast = forecast.getDetailedForecast();
         detailedStateImageView.setImageDrawable(iconStorage.getIcon(detailedForecast.getStateId(), getContext()));
-        detailedTomorrowTextView.setText(new SimpleDateFormat("dd MMMM").format(new GregorianCalendar().getTime()));
+        detailedTomorrowTextView.setText(new SimpleDateFormat("dd MMMM", new Locale("en")).format(new GregorianCalendar().getTime()));
         detailedTemperatureTextView.setText(String.format("%.1f °C", detailedForecast.getTemperature()));
         detailedPressureTextView.setText(String.format("%.1f '", detailedForecast.getPressure()));
         detailedHumidityTextView.setText(detailedForecast.getHumidity() + " %");
@@ -102,8 +109,8 @@ public class TomorrowForecastFragment extends Fragment {
         int[] statesId = hourForecast.getStatesId();
         double[] temperatures = hourForecast.getTemperatures();
         for (int i = 0; i < 5; i++) {
-            statusImageView[i].setImageDrawable(iconStorage.getIcon(statesId[0], getContext()));
-            forecastTextView[i].setText(String.format("%.1f °C", temperatures[0]));
+            statusImageView[i].setImageDrawable(iconStorage.getIcon(statesId[i], getContext()));
+            forecastTextView[i].setText(String.format("%.1f °C", temperatures[i]));
         }
     }
 }

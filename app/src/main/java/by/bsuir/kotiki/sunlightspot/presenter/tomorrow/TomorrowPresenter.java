@@ -4,19 +4,22 @@ import android.support.v4.app.Fragment;
 
 import by.bsuir.kotiki.sunlightspot.entity.Forecast;
 import by.bsuir.kotiki.sunlightspot.entity.day.DayForecast;
+import by.bsuir.kotiki.sunlightspot.model.location.LocationManager;
 import by.bsuir.kotiki.sunlightspot.model.parser.tomorrow.TomorrowForecastParser;
-import by.bsuir.kotiki.sunlightspot.presenter.Presenter;
+import by.bsuir.kotiki.sunlightspot.presenter.ForecastPresenter;
 import by.bsuir.kotiki.sunlightspot.view.tomorrow.TomorrowForecastFragment;
 
-public final class TomorrowPresenter implements Presenter {
+public final class TomorrowPresenter implements ForecastPresenter {
     private final TomorrowForecastFragment fragment;
+    private final LocationManager locationManager;
 
     public TomorrowPresenter(Fragment fragment) {
         this.fragment = (TomorrowForecastFragment) fragment;
+        this.locationManager = LocationManager.getInstance(fragment.getActivity().getApplicationContext());
     }
 
     public void updateForecast() {
-        new TomorrowForecastParser(this).execute();
+        new TomorrowForecastParser(this, locationManager.getLocationParam()).execute();
     }
 
     @Override

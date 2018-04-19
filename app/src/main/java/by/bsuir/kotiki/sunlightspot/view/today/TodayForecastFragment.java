@@ -19,7 +19,7 @@ import by.bsuir.kotiki.sunlightspot.model.icon.IconStorage;
 import by.bsuir.kotiki.sunlightspot.presenter.today.TodayPresenter;
 
 public class TodayForecastFragment extends Fragment {
-    private final TodayPresenter presenter = new TodayPresenter(this);
+    private TodayPresenter presenter;
     private final IconStorage iconStorage = IconStorage.getInstance();
     private final AnimalStorage animalStorage = AnimalStorage.getInstance();
 
@@ -31,6 +31,7 @@ public class TodayForecastFragment extends Fragment {
     private TextView detailedHumidityTextView;
     private TextView detailedWindDegreeTextView;
     private TextView detailedWindSpeedTextView;
+    private TextView detailedCityTextView;
 
     private TextView[] forecastTextView = new TextView[5];
     private ImageView[] statusImageView = new ImageView[5];
@@ -50,8 +51,6 @@ public class TodayForecastFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_today_forecast, container, false);
-        presenter.updateForecast();
-        ImageView currentStateImageView = view.findViewById(R.id.currentStateImageView);
         return view;
     }
 
@@ -68,6 +67,7 @@ public class TodayForecastFragment extends Fragment {
         detailedHumidityTextView = getView().findViewById(R.id.humidityTextView);
         detailedWindDegreeTextView = getView().findViewById(R.id.windTextView);
         detailedWindSpeedTextView = getView().findViewById(R.id.speedTextView);
+        detailedCityTextView = getView().findViewById(R.id.cityTextView);
 
         // set up forecast text views
         forecastTextView[0] = getView().findViewById(R.id.temperature1TextView);
@@ -84,13 +84,23 @@ public class TodayForecastFragment extends Fragment {
         statusImageView[4] = getView().findViewById(R.id.state5ImageView);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        presenter = new TodayPresenter(this);
+        presenter.updateForecast();
+    }
+
     public void displayMessage(String message) {
         getActivity().runOnUiThread(() -> Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show());
     }
 
     public void setData(DayForecast forecast) {
-        //set detailed forecast data
         DetailedForecast detailedForecast = forecast.getDetailedForecast();
+        HourForecast hourForecast = forecast.getHourForecast();
+
+        //set detailed forecast data
         detailedAnimalImageView.setImageDrawable(animalStorage.getAnimal(detailedForecast.getStateId(), getContext()));
         detailedStateImageView.setImageDrawable(iconStorage.getIcon(detailedForecast.getStateId(), getContext()));
         detailedStateTextView.setText(detailedForecast.getState());
@@ -99,14 +109,14 @@ public class TodayForecastFragment extends Fragment {
         detailedHumidityTextView.setText(detailedForecast.getHumidity() + " %");
         detailedWindDegreeTextView.setText(detailedForecast.getWindDegree() + " °");
         detailedWindSpeedTextView.setText(detailedForecast.getWindSpeed() + " m/s");
+        detailedCityTextView.setText(hourForecast.getCity());
 
         // set hour forecast data
-        HourForecast hourForecast = forecast.getHourForecast();
         int[] statesId = hourForecast.getStatesId();
         double[] temperatures = hourForecast.getTemperatures();
         for (int i = 0; i < 5; i++) {
-            statusImageView[i].setImageDrawable(iconStorage.getIcon(statesId[0], getContext()));
-            forecastTextView[i].setText(String.format("%.1f °C", temperatures[0]));
+            statusImageView[i].setImageDrawable(iconStorage.getIcon(statesId[i], getContext()));
+            forecastTextView[i].setText(String.format("%.1f °C", temperatures[i]));
         }
     }
 }

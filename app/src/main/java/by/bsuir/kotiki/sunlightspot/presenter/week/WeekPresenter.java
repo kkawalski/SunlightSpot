@@ -4,19 +4,22 @@ import android.support.v4.app.Fragment;
 
 import by.bsuir.kotiki.sunlightspot.entity.Forecast;
 import by.bsuir.kotiki.sunlightspot.entity.week.WeekForecast;
+import by.bsuir.kotiki.sunlightspot.model.location.LocationManager;
 import by.bsuir.kotiki.sunlightspot.model.parser.week.WeekForecastParser;
-import by.bsuir.kotiki.sunlightspot.presenter.Presenter;
+import by.bsuir.kotiki.sunlightspot.presenter.ForecastPresenter;
 import by.bsuir.kotiki.sunlightspot.view.week.WeekForecastFragment;
 
-public final class WeekPresenter implements Presenter {
+public final class WeekPresenter implements ForecastPresenter {
     private final WeekForecastFragment fragment;
+    private final LocationManager locationManager;
 
     public WeekPresenter(Fragment fragment) {
         this.fragment = (WeekForecastFragment) fragment;
+        this.locationManager = LocationManager.getInstance(fragment.getActivity().getApplicationContext());
     }
 
     public void updateForecast() {
-        new WeekForecastParser(this).execute();
+        new WeekForecastParser(this, locationManager.getLocationParam()).execute();
     }
 
     @Override

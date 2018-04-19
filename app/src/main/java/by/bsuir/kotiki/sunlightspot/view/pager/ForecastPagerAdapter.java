@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.bsuir.kotiki.sunlightspot.view.settings.SettingsFragment;
 import by.bsuir.kotiki.sunlightspot.view.today.TodayForecastFragment;
 import by.bsuir.kotiki.sunlightspot.view.tomorrow.TomorrowForecastFragment;
 import by.bsuir.kotiki.sunlightspot.view.week.WeekForecastFragment;
@@ -16,6 +17,7 @@ public class ForecastPagerAdapter extends FragmentPagerAdapter {
 
     public ForecastPagerAdapter(FragmentManager fm) {
         super(fm);
+        fragments.add(SettingsFragment.newInstance());
         fragments.add(TodayForecastFragment.newInstance());
         fragments.add(TomorrowForecastFragment.newInstance());
         fragments.add(WeekForecastFragment.newInstance());
@@ -28,6 +30,6 @@ public class ForecastPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

@@ -7,13 +7,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import by.bsuir.kotiki.sunlightspot.presenter.Presenter;
+import by.bsuir.kotiki.sunlightspot.presenter.ForecastPresenter;
 
 public abstract class Parser extends AsyncTask<Void, Void, String> {
-    protected final Presenter presenter;
+    protected final ForecastPresenter presenter;
     protected final String url;
 
-    protected Parser(Presenter presenter, String url) {
+    protected Parser(ForecastPresenter presenter, String url) {
         this.presenter = presenter;
         this.url = url;
     }

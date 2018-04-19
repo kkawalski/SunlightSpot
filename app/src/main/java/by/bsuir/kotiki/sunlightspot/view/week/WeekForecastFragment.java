@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import by.bsuir.kotiki.sunlightspot.R;
 import by.bsuir.kotiki.sunlightspot.entity.week.WeekForecast;
@@ -20,7 +21,7 @@ import by.bsuir.kotiki.sunlightspot.model.icon.IconStorage;
 import by.bsuir.kotiki.sunlightspot.presenter.week.WeekPresenter;
 
 public class WeekForecastFragment extends Fragment {
-    private final WeekPresenter presenter = new WeekPresenter(this);
+    private WeekPresenter presenter;
     private final IconStorage iconStorage = IconStorage.getInstance();
 
     private TextView[] dateTextView = new TextView[6];
@@ -41,14 +42,12 @@ public class WeekForecastFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_week_forecast, container, false);
-        presenter.updateForecast();
-        return view;
+        return inflater.inflate(R.layout.fragment_week_forecast, container, false);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // set up date text views
         dateTextView[0] = getView().findViewById(R.id.date1TextView);
@@ -75,13 +74,21 @@ public class WeekForecastFragment extends Fragment {
         statusImageView[5] = getView().findViewById(R.id.status6ImageView);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        presenter = new WeekPresenter(this);
+        presenter.updateForecast();
+    }
+
     public void displayMessage(String message) {
         getActivity().runOnUiThread(() -> Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show());
     }
 
     public void setData(WeekForecast forecast) {
         // set dates
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM", new Locale("en"));
         Calendar calendar = new GregorianCalendar();
         for (int i = 0; i < 6; i++) {
             calendar.add(Calendar.DATE, 1);

@@ -3,6 +3,7 @@ package by.bsuir.kotiki.sunlightspot.entity.day.hour;
 import java.util.Arrays;
 
 public class HourForecast {
+    private String city;
     private double[] temperatures;
     private String[] states;
     private int[] statesId;
@@ -10,10 +11,19 @@ public class HourForecast {
     public HourForecast() {
     }
 
-    public HourForecast(double[] temperatures, String[] states, int[] statesId) {
+    public HourForecast(String city, double[] temperatures, String[] states, int[] statesId) {
+        this.city = city;
         this.temperatures = temperatures;
         this.states = states;
         this.statesId = statesId;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public double[] getTemperatures() {

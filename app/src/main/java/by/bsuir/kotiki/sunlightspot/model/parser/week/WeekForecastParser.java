@@ -8,13 +8,13 @@ import java.util.Date;
 import by.bsuir.kotiki.sunlightspot.entity.week.WeekForecast;
 import by.bsuir.kotiki.sunlightspot.model.icon.IconStorage;
 import by.bsuir.kotiki.sunlightspot.model.parser.Parser;
-import by.bsuir.kotiki.sunlightspot.presenter.Presenter;
+import by.bsuir.kotiki.sunlightspot.presenter.ForecastPresenter;
 
 public class WeekForecastParser extends Parser {
     private static final IconStorage iconStorage = IconStorage.getInstance();
 
-    public WeekForecastParser(Presenter presenter) {
-        super(presenter, "http://api.openweathermap.org/data/2.5/forecast/daily?id=625144&appid=57432abff315a24276715cd1a27b3d18");
+    public WeekForecastParser(ForecastPresenter presenter, String location) {
+        super(presenter, String.format("http://api.openweathermap.org/data/2.5/forecast/daily?%sappid=57432abff315a24276715cd1a27b3d18", location));
     }
 
     @Override
