@@ -1,5 +1,7 @@
 package by.bsuir.kotiki.sunlightspot.presenter.today;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 
 import by.bsuir.kotiki.sunlightspot.entity.Forecast;
@@ -18,6 +20,7 @@ public final class TodayPresenter implements ForecastPresenter {
         this.locationManager = LocationManager.getInstance(fragment.getActivity().getApplicationContext());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void updateForecast() {
         new TodayForecastParser(this, locationManager.getLocationParam()).execute();
     }

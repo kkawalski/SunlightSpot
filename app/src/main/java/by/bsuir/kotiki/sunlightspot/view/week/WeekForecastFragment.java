@@ -1,7 +1,9 @@
 package by.bsuir.kotiki.sunlightspot.view.week;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +21,12 @@ import by.bsuir.kotiki.sunlightspot.R;
 import by.bsuir.kotiki.sunlightspot.entity.week.WeekForecast;
 import by.bsuir.kotiki.sunlightspot.model.icon.IconStorage;
 import by.bsuir.kotiki.sunlightspot.presenter.week.WeekPresenter;
+import by.bsuir.kotiki.sunlightspot.view.ForecastView;
 
-public class WeekForecastFragment extends Fragment {
+public class WeekForecastFragment extends Fragment implements ForecastView {
     private WeekPresenter presenter;
     private final IconStorage iconStorage = IconStorage.getInstance();
+    private boolean firstTimeFlag = true;
 
     private TextView[] dateTextView = new TextView[6];
     private TextView[] forecastTextView = new TextView[6];
@@ -74,6 +78,7 @@ public class WeekForecastFragment extends Fragment {
         statusImageView[5] = getView().findViewById(R.id.status6ImageView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -106,6 +111,16 @@ public class WeekForecastFragment extends Fragment {
         int[] statesId = forecast.getStatesId();
         for (int i = 0; i < 6; i++) {
             statusImageView[i].setImageDrawable(iconStorage.getIcon(statesId[i], getContext()));
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void reloadForecast() {
+        if (!firstTimeFlag) {
+            presenter.updateForecast();
+        } else {
+            firstTimeFlag = false;
         }
     }
 }

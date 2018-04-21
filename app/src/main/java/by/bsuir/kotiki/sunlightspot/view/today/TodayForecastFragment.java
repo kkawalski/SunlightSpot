@@ -1,7 +1,9 @@
 package by.bsuir.kotiki.sunlightspot.view.today;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +19,13 @@ import by.bsuir.kotiki.sunlightspot.entity.day.hour.HourForecast;
 import by.bsuir.kotiki.sunlightspot.model.animal.AnimalStorage;
 import by.bsuir.kotiki.sunlightspot.model.icon.IconStorage;
 import by.bsuir.kotiki.sunlightspot.presenter.today.TodayPresenter;
+import by.bsuir.kotiki.sunlightspot.view.ForecastView;
 
-public class TodayForecastFragment extends Fragment {
+public class TodayForecastFragment extends Fragment implements ForecastView {
     private TodayPresenter presenter;
     private final IconStorage iconStorage = IconStorage.getInstance();
     private final AnimalStorage animalStorage = AnimalStorage.getInstance();
+    private boolean firstTimeFlag = true;
 
     private ImageView detailedAnimalImageView;
     private ImageView detailedStateImageView;
@@ -84,6 +88,7 @@ public class TodayForecastFragment extends Fragment {
         statusImageView[4] = getView().findViewById(R.id.state5ImageView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -117,6 +122,16 @@ public class TodayForecastFragment extends Fragment {
         for (int i = 0; i < 5; i++) {
             statusImageView[i].setImageDrawable(iconStorage.getIcon(statesId[i], getContext()));
             forecastTextView[i].setText(String.format("%.1f °C", temperatures[i]));
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void reloadForecast() {
+        if (!firstTimeFlag) {
+            presenter.updateForecast();
+        } else {
+            firstTimeFlag = false;
         }
     }
 }
