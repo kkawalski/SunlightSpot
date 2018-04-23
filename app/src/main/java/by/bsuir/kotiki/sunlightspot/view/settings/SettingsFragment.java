@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.FutureTask;
 
 import by.bsuir.kotiki.sunlightspot.R;
+import by.bsuir.kotiki.sunlightspot.model.animal.AnimalStorage;
 import by.bsuir.kotiki.sunlightspot.presenter.settings.SettingsPresenter;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
@@ -33,6 +35,9 @@ public class SettingsFragment extends Fragment implements SearchView.OnQueryText
     private List<String> locations;
     private ArrayAdapter<String> resultLocationAdapter;
     private String locationParam = "";
+
+    private ImageButton shuniaImageButton;
+    private ImageButton quipImageButton;
 
     public SettingsFragment() {
     }
@@ -58,6 +63,11 @@ public class SettingsFragment extends Fragment implements SearchView.OnQueryText
         locationSearchView = getView().findViewById(R.id.locationSearchView);
         autoLocationCheckBox = getView().findViewById(R.id.autoLocationCheckBox);
         resultLocationListView = getView().findViewById(R.id.resultLocationListView);
+
+        shuniaImageButton = getView().findViewById(R.id.shuniaImageButton);
+        shuniaImageButton.setOnClickListener(shuniaListener);
+        quipImageButton = getView().findViewById(R.id.quipImageButton);
+        quipImageButton.setOnClickListener(quipListener);
     }
 
     @Override
@@ -143,4 +153,22 @@ public class SettingsFragment extends Fragment implements SearchView.OnQueryText
         locationParam = "q=" + location.substring(0, location.indexOf(',')) + "&";
         resultLocationListView.setVisibility(View.INVISIBLE);
     }
+
+    private final AnimalStorage animalStorage = AnimalStorage.getInstance();
+
+    private ImageButton.OnClickListener shuniaListener = view -> {
+        if (animalStorage.getActiveAnimal().equals("shunia")) {
+            return;
+        }
+
+        animalStorage.setActiveAnimal("shunia");
+    };
+
+    private ImageButton.OnClickListener quipListener = view -> {
+        if (animalStorage.getActiveAnimal().equals("quip")) {
+            return;
+        }
+
+        animalStorage.setActiveAnimal("quip");
+    };
 }

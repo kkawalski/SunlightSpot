@@ -28,4 +28,12 @@ public final class AnimalStorage {
 
         return context.getResources().getDrawable(context.getResources().getIdentifier(path, "mipmap", context.getPackageName()));
     }
+
+    public String getActiveAnimal() {
+        return activeAnimal;
+    }
+
+    public void setActiveAnimal(String activeAnimal) {
+        this.activeAnimal = activeAnimal;
+    }
 }
