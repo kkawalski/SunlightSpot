@@ -19,5 +19,6 @@ public class ForecastActivity extends FragmentActivity {
 
         viewPager = findViewById(R.id.container);
         viewPager.setAdapter(forecastPagerAdapter);
+        viewPager.setCurrentItem(1);
     }
 }
